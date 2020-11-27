@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt k3
+name: Build OpenWrt
 
 on:
   release:
@@ -22,8 +22,10 @@ on:
 #    types: [started]
 
 env:
-  REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: dev-19.07
+  #REPO_URL: https://github.com/Lienol/openwrt
+  #REPO_BRANCH: dev-19.07
+  REPO_URL: https://github.com/coolsnowwolf/lede.git
+  REPO_BRANCH: master
   CONFIG_FILE: .config
   DIY_SH: diy.sh
   FREE_UP_DISK: false
@@ -69,6 +71,9 @@ jobs:
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
+    
+    - name: add fullconenat
+      run: git clone -b master --single-branch https://github.com/LGA1150/openwrt-fullconenat package/fullconenat
 
     - name: Load custom configuration
       run: |
